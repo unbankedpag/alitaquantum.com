@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  alitaquantum:
+    image: node:lts-alpine
+    container_name: alitaquantum
+    working_dir: /app
+    tty: true
+    volumes:
+      - "$PWD:/app"
+    ports:
+      - "3000:3000"
