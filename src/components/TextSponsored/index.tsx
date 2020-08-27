@@ -51,7 +51,7 @@ const TextSponsored = () => {
 
               <S.Wrapper>
                 Comece a minerar Bitcoin através do navegador com a CryptoTab
-                <S.ImgLink href="https://cryptotabbrowser.com/14543548" target="black">
+                <S.ImgLink href="https://cryptotabbrowser.com/15537985" target="black">
                   <S.ContentImg src="https://i.imgur.com/BXCTaEX.png" />
                 </S.ImgLink>
               </S.Wrapper>
