@@ -22,7 +22,7 @@ const Notification: React.FC = () => (
 
     <S.Paragraph>
       Caso deseja realizar uma transação para testes, fique à vontade, este
-      projeto é 100% funcional. Para construir um projeto usando essa API, você
+      projeto é 100% funcional. Para construir um projeto usando a API da ChangeNOW, você
       deverá se tornar um{" "}
       <S.TxtLink
         href="https://changenow.io?link_id=9f50d5b539b6a2"
