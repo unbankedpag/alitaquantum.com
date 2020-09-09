@@ -10,12 +10,7 @@ import { useHistory } from "react-router-dom";
 import { Props, State, Success } from "./types";
 
 import { useListCoinValueContext } from "../ListCoinValueContext";
-import axios from "axios";
-
-import path from "path";
-import { config } from 'dotenv';
-
-config({ path: path.resolve(__dirname, "..", "..", "..", ".env") });
+import { api } from "../../services/api";
 
 const ExchangeContext = createContext<State>({} as State);
 
@@ -131,9 +126,9 @@ export const ExchangeProvider: React.FC<Props> = ({ ...props }) => {
     };
 
     if (payoutAddress && Number(flow.amount) >= minAmount) {
-      axios
+      api
         .post<Success>(
-          `https://changenow.io/api/v1/transactions/${process.env.REACT_APP_SECRET_CODE}`,
+          `/transactions/${process.env.REACT_APP_API_KEY}`,
           data
         )
         .then((response) => {

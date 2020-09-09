@@ -7,7 +7,6 @@ import React, {
   FormEvent,
 } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import {
   State,
   Coins,
@@ -16,10 +15,8 @@ import {
   EstimatedAmount,
   MinAmount,
 } from "./types";
-import path from "path";
-import { config } from 'dotenv';
 
-config({ path: path.resolve(__dirname, "..", "..", "..", ".env") });
+import { api } from "../../services/api";
 
 export const ListCoinValueContext = createContext<State>({} as State);
 
@@ -43,8 +40,8 @@ export const ListCoinValueProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function loadCoins() {
-      const response = await axios.get<Coins[]>(
-        `https://changenow.io/api/v1/currencies?active=true`
+      const response = await api.get<Coins[]>(
+        `/currencies?active=true`
       );
       setCoins(response.data);
     }
@@ -53,8 +50,8 @@ export const ListCoinValueProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function marketValidation() {
-      const response = await axios.get(
-        `https://changenow.io/api/v1/market-info/available-pairs/?includePartners=false`
+      const response = await api.get(
+        `/market-info/available-pairs/?includePartners=false`
       );
       setMarketInfo(response.data);
     }
@@ -65,8 +62,8 @@ export const ListCoinValueProvider: React.FC = ({ children }) => {
     const { from, to } = selectedCoin;
 
     async function minAmount() {
-      const response = await axios.get<MinAmount>(
-        `https://changenow.io/api/v1/min-amount/${from}_${to}`
+      const response = await api.get<MinAmount>(
+        `/min-amount/${from}_${to}`
       );
 
       const data = {
@@ -98,8 +95,8 @@ export const ListCoinValueProvider: React.FC = ({ children }) => {
     const { amount, from, to } = flow;
 
     async function exchangeAmount() {
-      const response = await axios.get<EstimatedAmount>(
-        `https://changenow.io/api/v1/exchange-amount/${amount}/${from}_${to}/?api_key=${process.env.REACT_APP_SECRET_CODE}`
+      const response = await api.get<EstimatedAmount>(
+        `/exchange-amount/${amount}/${from}_${to}/?api_key=${process.env.REACT_APP_API_KEY}`
       );
       setEstimatedAmount(response.data.estimatedAmount);
     }
